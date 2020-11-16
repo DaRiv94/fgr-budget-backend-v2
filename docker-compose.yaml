@@ -1,0 +1,21 @@
+version: '3.8'
+
+networks:
+    budget:
+      external: true
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "4500:4500"
+        volumes:
+            - /app/node_modules
+            - .:/app
+        env_file: .env
+        environment: 
+            - CHOKIDAR_USEPOLLING=true
+        networks: 
+            - budget
