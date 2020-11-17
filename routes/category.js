@@ -9,7 +9,11 @@ const { Op } = require("sequelize");
 //Get all Catgeories /category
 router.get("/", auth_M, async (req, res) => {
     try {
-        let allCategories = await Category.findAll();
+        let allCategories = await Category.findAll({
+            where: {
+                user_id: String(req.user.id)
+            }
+        });
 
         res.send({ categories: allCategories });
     } catch (e) {
