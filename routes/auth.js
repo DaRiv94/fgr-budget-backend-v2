@@ -39,7 +39,7 @@ router.post("/login", async (req,res)=>{
     }catch(ex){
         console.log("ERROR: ", String(ex))
         if (ex.response){
-            return res.status(400).json({detail:ex.response.data})
+            return res.status(400).json(ex.response.data)
         }else{
             return res.status(400).json({detail:JSON.stringify(ex)})
         }
