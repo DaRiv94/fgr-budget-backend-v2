@@ -141,9 +141,9 @@ router.delete("/:id", auth_M, async (req, res) => {
         if (req.params.id != parseInt(req.params.id)){ 
             return res.status(400).json({ detail: "query param must be integer" })
         }
-        const budget = await Budget.findByPk(req.params.id);
+        let budget = await Budget.findByPk(req.params.id);
         if (budget === null) {
-            res.status(404).json({ detail: `No budget with id ${req.params.id} was found` })
+            return res.status(404).json({ detail: `No budget with id ${req.params.id} was found` })
         }
 
         budget = await budget.destroy();
@@ -151,7 +151,7 @@ router.delete("/:id", auth_M, async (req, res) => {
         return res.json({ budget })
     } catch (e) {
 
-        res.status(500).send({ "Error": String(e) });
+        return res.status(500).send({ "Error": String(e) });
     }
 });
 

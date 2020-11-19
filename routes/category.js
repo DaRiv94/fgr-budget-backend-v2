@@ -124,7 +124,7 @@ router.delete("/:id", auth_M, async (req, res) => {
             return res.status(400).json({ detail: "query param must be integer" })
         }
 
-        const category = await Category.findOne({where: {
+        let category = await Category.findOne({where: {
             [Op.and]: [
                 { id: req.params.id },
                 { user_id: String(req.user.id) }
