@@ -4,6 +4,7 @@ const router = express.Router();
 const Bank = require('../models/Bank')
 const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
+const Category = require('../models/Category');
 const auth_M = require('../middleware/auth');
 const { Op } = require("sequelize");
 

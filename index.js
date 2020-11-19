@@ -10,6 +10,7 @@ const plaidRoutes = require('./routes/plaid');
 const infoRoutes = require('./routes/info');
 const budgetRoutes = require('./routes/budget');
 const categoryRoutes = require('./routes/category');
+const categorytransactionRoutes = require('./routes/categorytansaction');
 const triggerwebookRoutes = require('./routes/triggerwebhook');
 
 
@@ -44,6 +45,7 @@ app.use('/plaid',plaidRoutes);
 app.use('/auth',authRoutes);
 app.use('/info', infoRoutes);
 app.use('/category', categoryRoutes);
+app.use('/categorytransaction', categorytransactionRoutes);
 app.use('/budget', budgetRoutes);
 app.use('/triggerwebhook', triggerwebookRoutes);
 

@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require("../db/sequelize");
+const Transaction = require('./Transaction')
+const CategoryTransaction = require('./CategoryTransaction')
 
 class Category extends Model {
   /**
@@ -9,6 +11,15 @@ class Category extends Model {
    */
   static associate(models) {
     // define association here
+    // Category.belongsToMany(Transaction, {
+    //   through: CategoryTransaction
+    // });
+    // Category.belongsToMany(Transaction, {
+    //   through: CategoryTransaction,
+    //   as: 'transaction',
+    //   foreignKey: 'category_id',
+    //   otherKey: 'transaction_id'
+    // });
   }
 };
 Category.init({
