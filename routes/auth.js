@@ -56,9 +56,10 @@ router.post("/", async (req,res)=>{
     try{
         let axiosConfig = getAxiosConfig(token);
         let response = await axios.post(baseUrl+"auth",{}, axiosConfig );
-        req.user = response.data
-        next();
+        // console.log("response")
+        return res.status(200).json({response:response.data})
     }catch(ex){
+        // console.log("ex: ", ex)
         if (ex.response){
             return res.status(400).json({detail:ex.response.data})
         }else{
