@@ -4,8 +4,9 @@ const router = express.Router();
 const axios = require("axios");
 
 //This is the dynamic auth url
-const baseUrl="http://fgr_dynamic_auth_web_1:4000/";
+// const baseUrl="http://fgr_dynamic_auth_web_1:4000";
 // const baseUrl="http://localhost:4000/";
+const baseUrl = process.env.FGR_BUDGET_AUTH_URL
 
 router.post("/register", async (req,res)=>{
     let email = req.body.email || null
@@ -14,7 +15,7 @@ router.post("/register", async (req,res)=>{
     
     try{
         // let response = await axios.post(baseUrl+"register", {email, password, password2}, getAxiosConfig() );
-        let response = await axios.post(baseUrl+"register", {email, password, password2} );
+        let response = await axios.post(baseUrl+"/register", {email, password, password2} );
         
         return res.status(response.status).send(response.data)
     }catch(ex){
@@ -33,7 +34,7 @@ router.post("/login", async (req,res)=>{
     
     try{
 
-        let response = await axios.post(baseUrl+"auth/login", {email, password});
+        let response = await axios.post(baseUrl+"/auth/login", {email, password});
 
         return res.status(response.status).send(response.data)
     }catch(ex){
@@ -55,7 +56,7 @@ router.post("/", async (req,res)=>{
 
     try{
         let axiosConfig = getAxiosConfig(token);
-        let response = await axios.post(baseUrl+"auth",{}, axiosConfig );
+        let response = await axios.post(baseUrl+"/auth",{}, axiosConfig );
         // console.log("response")
         return res.status(200).json({response:response.data})
     }catch(ex){

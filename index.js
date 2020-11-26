@@ -10,6 +10,7 @@ const plaidRoutes = require('./routes/plaid');
 const infoRoutes = require('./routes/info');
 const budgetRoutes = require('./routes/budget');
 const categoryRoutes = require('./routes/category');
+const heathlyRoutes = require('./routes/heathly');
 const categorytransactionRoutes = require('./routes/categorytansaction');
 const triggerwebookRoutes = require('./routes/triggerwebhook');
 
@@ -41,6 +42,7 @@ app.use(cors())
 
 
 //Routes
+app.use('/healthy',heathlyRoutes);
 app.use('/plaid',plaidRoutes);
 app.use('/auth',authRoutes);
 app.use('/info', infoRoutes);
