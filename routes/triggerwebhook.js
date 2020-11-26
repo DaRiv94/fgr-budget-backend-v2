@@ -58,6 +58,7 @@ router.post("/", auth_M, async (req, res) => {
         // return res.json({detail:"All good"})
 
     } catch (e) {
+        console.log("triggerwebhook error: ", e)
 
         res.status(500).send({ "Error": String(e) });
     }

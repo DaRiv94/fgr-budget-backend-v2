@@ -114,6 +114,15 @@ router.get("/monthly-summary", auth_M, async (req, res) => {
         console.log("allAccounts length: ", allAccounts.length)
         for(let j = 0; j < allAccounts.length; j++){
             let account = {};
+
+            let institution_name = ""
+            for(let l = 0; l < banks.length; l++){
+                if(banks[l].item_id == allAccounts[j].item_id){
+                    institution_name = banks[l].institution_name
+                }
+            }
+
+            account.institution_name = institution_name
             account.name = allAccounts[j].name;
             account.id = allAccounts[j].account_id;
             account.balence = allAccounts[j].available_balance;
