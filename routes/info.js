@@ -89,29 +89,29 @@ router.get("/monthly-summary", auth_M, async (req, res) => {
     let accountsSummary = [];
     let allTransactions = {};
     try {
-
+        // console.log("/monthly-summary req.user.id:", req.user.id)
         let banks = await Bank.findAll({
             where: {
                 user_id: String(req.user.id)
             }
         })
-        console.log("BANK LENGTH: ", banks.length)
+        // console.log("BANK LENGTH: ", banks.length)
         bank_item_ids = []
         for(let k = 0; k < banks.length; k++){
             bank_item_ids.push(banks[k].item_id)
-            console.log("Pushing bank_item_id: ", banks[k].item_id)
+            // console.log("Pushing bank_item_id: ", banks[k].item_id)
         }
 
-        // allAccounts = await Account.find(); 
         let allAccounts = await Account.findAll({
             where: {
                 item_id: {
-                    [Op.or]: bank_item_ids
+                    [Op.in]: bank_item_ids
                   }
             }
         });
-        
-        console.log("allAccounts length: ", allAccounts.length)
+
+
+        // console.log("allAccounts length: ", allAccounts.length)
         for(let j = 0; j < allAccounts.length; j++){
             let account = {};
 
