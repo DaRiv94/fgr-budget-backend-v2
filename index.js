@@ -38,8 +38,6 @@ app.use(bodyParser.json())
 //     console.log("Running app in production");
 // }
 app.use(cors())
-//When developing on phone, temparaily comment the above cors section. if I keep doing then create a git rbanch for it
-
 
 //Routes
 app.use('/healthy',heathlyRoutes);

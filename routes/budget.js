@@ -1,5 +1,4 @@
 const express = require('express');
-const moment = require('moment');
 const router = express.Router();
 const Budget = require('../models/Budget')
 const Category = require('../models/Category')
@@ -31,9 +30,7 @@ router.get("/", auth_M, async (req, res) => {
 // POST budgets /budget  Create a budget
 router.post("/", auth_M, async (req, res) => {
     try {
-        // if (!req.body || !req.body.name || !req.body.budget_max || req.body.budget_real ==null || !req.body.category_id) {
-        //     return res.status(400).json({ detail: "Please send valid budget body" })
-        // }
+
         if (!req.body || !req.body.name || !req.body.budget_max || !req.body.category_id) {
             return res.status(400).json({ detail: "Please send valid budget body" })
         }
@@ -48,7 +45,7 @@ router.post("/", auth_M, async (req, res) => {
         })
 
         if (budget) {
-            return res.status(400).send("That budget name is already in use");
+            return res.status(400).json({ detail: "That budget name is already in use" });
         }
 
         const category = await Category.findByPk(req.body.category_id);
@@ -58,9 +55,8 @@ router.post("/", auth_M, async (req, res) => {
 
         let budget_real = await getBudgetActual(req.body.category_id, String(req.user.id));
 
-        // budget = await Budget.create({ name: req.body.name, budget_max: req.body.budget_max, budget_real: req.body.budget_real, category_id: req.body.category_id, user_id: req.user.id });
         budget = await Budget.create({ name: req.body.name, budget_max: req.body.budget_max, budget_real: budget_real, category_id: req.body.category_id, user_id: req.user.id });
-        // console.log("Git to here? category_id:",req.body.category_id)
+
         return res.json({ budget })
     } catch (e) {
 
@@ -105,6 +101,7 @@ router.put("/:id", auth_M, async (req, res) => {
         if (category === null) {
             return res.status(400).json({ detail: `Non-existant category_id: ${req.body.category_id}` })
         }
+        
         //see https://sequelize.org/master/manual/model-querying-basics.html
         // Find a budget with the same name you are trying to change to that is not the budget you are using
         const otherbudget = await Budget.findOne({
@@ -117,7 +114,7 @@ router.put("/:id", auth_M, async (req, res) => {
             }
         })
         if (otherbudget) {
-            return res.status(400).send("That budget name is already in use");
+            return res.status(400).json({ detail: "That budget name is already in use" });
         }
 
         let budget_real = await getBudgetActual(req.body.category_id, String(req.user.id));

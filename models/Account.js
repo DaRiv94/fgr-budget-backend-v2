@@ -4,8 +4,6 @@ const sequelize = require("../db/sequelize");
 class Account extends Model {
   static associate(models) {
     // define association here
-    // Account.hasMany(Transaction);
-    // Transaction.belongsTo(Account);
   }
 };
 

@@ -2,6 +2,8 @@ const CategoryTransaction = require('../models/CategoryTransaction');
 const Transaction = require('../models/Transaction');
 const { Op } = require("sequelize");
 
+//This Util function gets the real value of a budget 
+//based on the transactions that have the budget category assigned to them.
 module.exports = async function(category_id, user_id){
     let actual_value = 0
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../models/Category');
-const {Transaction} = require('../models/Transaction');
 const auth_M = require('../middleware/auth');
 const { Op } = require("sequelize");
 

@@ -1,9 +1,8 @@
-// const CategoryTransaction = require('../models/CategoryTransaction');
-// const Transaction = require('../models/Transaction');
 const { Op } = require("sequelize");
 const Budget = require('../models/Budget')
 const getBudgetActual = require('./getBudgetActual')
 
+//This util function updates a budgets when categories change for a specifc user
 module.exports = async function(category_id, user_id){
 
     //Get CategoryTransactions Based on user and category
@@ -20,11 +19,9 @@ module.exports = async function(category_id, user_id){
 
 
     //Update budgets
-    let transaction_ids = []
     for(let i =0;i<updatedbudgets.length;i++){
         updatedbudgets[i].budget_real = budget_real
         updatedbudgets[i].save()
     }
-
     return updatedbudgets
 }
