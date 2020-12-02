@@ -37,6 +37,11 @@ FGR_BUDGET_AUTH_URL=<FGR_BUDGET_AUTH_URL>
 **FGR_BUDGET_AUTH_URL** Url to connect to the [fgr-dynamic-auth-service](https://github.com/DaRiv94/fgr_dynamic_auth) user authentication and authorization
 
 
+### Starting app
+Once you have your .env file at the root of your project you can start up the backend service for development with 
+`docker-compose up`
+
+
 ---
 ### NOTE TO SELF When Developing with Windows 10 Home
 Docker Toolbox does not play nice with docker-compose, so when I am developing with a windows 10 Home machine use the following cmds to start the backend service like so...
