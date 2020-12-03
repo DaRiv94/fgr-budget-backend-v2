@@ -6,7 +6,7 @@ const axios = require("axios");
 const { Op } = require("sequelize");
 
 // const moment = require('moment'); //I may use this to format the 
-//query param date if I allow the frontend to get transactions futher then 10 days in the past
+//query param date if I allow the frontend to get transactions futher then 90 days in the past
 
 const FGR_BUDGET_WEBHOOK_URL = process.env.FGR_BUDGET_WEBHOOK_URL
 
@@ -33,7 +33,7 @@ router.post("/", auth_M, async (req, res) => {
 
         start_date = req.body.start_date || null
         //I might use these in the future to give the user on the frontend the ablity to specify the start_date to grab transactions
-        //The default is 10 days in the past
+        //The default is 90 days in the past
 
         //Webhook body for manaul trigger
         webhook_body = {
